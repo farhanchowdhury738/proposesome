@@ -126,8 +126,8 @@
         <div>
             <h1 id="message">Will you be my life partner💞?</h1>
             <div class="buttons-container">
-                <button onclick="ppropose()">NO</button>
-                <button onclick="propose()">Yes, Of course</button>
+                <button id="noBtn" onclick="ppropose()">NO</button>
+                <button id="yesBtn" onclick="propose()">Yes, Of course</button>
             </div>
             <!-- Reload button positioned at the top-left corner -->
             <button class="reload-btn" onclick="reloadPage()">Reload</button>
@@ -137,11 +137,17 @@
             function propose() {
                 var msg = 'I Love You 2 💖';
                 document.getElementById('message').innerText = msg;
+                // Disable the other button once one is clicked
+                document.getElementById('noBtn').disabled = true;
+                document.getElementById('yesBtn').disabled = true;
             }
 
             function ppropose() {
                 var msg = 'I am just kidding😆';
                 document.getElementById('message').innerText = msg;
+                // Disable the other button once one is clicked
+                document.getElementById('noBtn').disabled = true;
+                document.getElementById('yesBtn').disabled = true;
             }
 
             // Function to reload the page
