@@ -1,46 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>proposesomeone</title>
+        <title>Propose Someone</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            h1{
-                color: red;
-                font-size: 60px;
-                font-family: sans-serif;
+            /* Deep background gradient */
+            body {
+                background: linear-gradient(45deg, #2c3e50, #34495e); /* Darker shades of blue-gray */
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                font-family: 'Arial', sans-serif;
                 text-align: center;
-
+                color: white;
+                padding: 20px;
+                box-sizing: border-box;
+                position: relative; /* Necessary for absolute positioning of reload button */
             }
-            button{
-                width: 600px;
-                background-color: goldenrod;
-                height: 150px;
-                border-radius: 20px;
-                font-size: 40px;
+
+            /* Title styling with animation */
+            h1 {
+                font-size: 60px;
+                font-family: 'Helvetica Neue', sans-serif;
+                text-align: center;
+                letter-spacing: 3px;
+                animation: bounce 1.5s infinite alternate;
+            }
+
+            @keyframes bounce {
+                0% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
+                100% {
+                    transform: translateY(0);
+                }
+            }
+
+            /* Button styling */
+            button {
+                width: 250px;
+                height: 70px;
+                background: linear-gradient(45deg, #e74c3c, #f39c12); /* Red to orange gradient */
+                border: none;
+                border-radius: 25px;
+                font-size: 20px;
                 font-weight: bold;
-                margin: 30px;
-
+                color: white;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin: 20px;
             }
-        </style>
 
+            button:hover {
+                transform: scale(1.1);
+                background: linear-gradient(45deg, #f39c12, #e74c3c);
+            }
+
+            button:focus {
+                outline: none;
+            }
+
+            /* Flex container for buttons */
+            .buttons-container {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            /* Media Queries for responsiveness */
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 45px;
+                }
+
+                button {
+                    width: 220px;
+                    height: 60px;
+                    font-size: 18px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                h1 {
+                    font-size: 35px;
+                }
+
+                button {
+                    width: 200px;
+                    height: 55px;
+                    font-size: 16px;
+                }
+            }
+
+            /* Reload button styling */
+            .reload-btn {
+                background: linear-gradient(45deg, #3498db, #9b59b6); /* Blue to purple gradient */
+                width: 200px;
+                height: 60px;
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                position: absolute; /* Positioning at the top-left */
+                top: 20px;  /* Distance from top */
+                left: 20px; /* Distance from left */
+                transition: all 0.3s ease;
+            }
+
+            .reload-btn:hover {
+                transform: scale(1.1);
+                background: linear-gradient(45deg, #9b59b6, #3498db);
+            }
+
+        </style>
     </head>
     <body>
-        <h1 id="message">Will you be my life partner💞? </h1>
-        <button onclick="ppropose()">NO</button>
-        <button onclick="propose()">Yes, Of course </button>
+        <div>
+            <h1 id="message">Will you be my life partner💞?</h1>
+            <div class="buttons-container">
+                <button onclick="ppropose()">NO</button>
+                <button onclick="propose()">Yes, Of course</button>
+            </div>
+            <!-- Reload button positioned at the top-left corner -->
+            <button class="reload-btn" onclick="reloadPage()">Reload</button>
+        </div>
+
         <script>
             function propose() {
-                var msg = 'I Love You 2 💖'
-                document.getElementById('message').innerText = msg
+                var msg = 'I Love You 2 💖';
+                document.getElementById('message').innerText = msg;
             }
+
             function ppropose() {
-                var msg = 'I am just kidding😆'
-                document.getElementById('message').innerText = msg
+                var msg = 'I am just kidding😆';
+                document.getElementById('message').innerText = msg;
             }
 
-
+            // Function to reload the page
+            function reloadPage() {
+                location.reload(); // This will reload the page
+            }
         </script>
-
     </body>
 </html>
