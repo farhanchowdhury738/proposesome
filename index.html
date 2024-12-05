@@ -55,6 +55,7 @@
                 cursor: pointer;
                 transition: all 0.3s ease;
                 margin: 20px;
+                position: relative; /* For positioning "NO" button */
             }
 
             button:hover {
@@ -126,7 +127,7 @@
         <div>
             <h1 id="message">Will you be my life partner💞?</h1>
             <div class="buttons-container">
-                <button id="noBtn" onclick="ppropose()">NO</button>
+                <button id="noBtn" onmouseover="startMoving()" onclick="ppropose()">NO</button>
                 <button id="yesBtn" onclick="propose()">Yes, Of course</button>
             </div>
             <!-- Reload button positioned at the top-left corner -->
@@ -134,10 +135,16 @@
         </div>
 
         <script>
+            let moveInterval; // Interval to move the "NO" button
+            let yesClicked = false; // Track if the "YES" button has been clicked
+
+            // Function to stop the NO button movement when YES is clicked
             function propose() {
+                yesClicked = true; // Stop the NO button from moving
+                clearInterval(moveInterval); // Stop the movement
                 var msg = 'I Love You 2 💖';
                 document.getElementById('message').innerText = msg;
-                // Disable the other button once one is clicked
+                // Disable both buttons
                 document.getElementById('noBtn').disabled = true;
                 document.getElementById('yesBtn').disabled = true;
             }
@@ -145,15 +152,49 @@
             function ppropose() {
                 var msg = 'I am just kidding😆';
                 document.getElementById('message').innerText = msg;
-                // Disable the other button once one is clicked
+                // Disable both buttons
                 document.getElementById('noBtn').disabled = true;
                 document.getElementById('yesBtn').disabled = true;
             }
 
-            // Function to reload the page
             function reloadPage() {
-                location.reload(); // This will reload the page
+                location.reload(); // Reload the page
             }
+
+            // Function to start moving the NO button when the user tries to hover
+            function startMoving() {
+                if (!yesClicked && !moveInterval) {
+                    moveInterval = setInterval(() => {
+                        moveNoButton();
+                    }, 200); // Moves every 200 milliseconds
+                }
+            }
+
+            // Function to move the NO button to a random position
+            function moveNoButton() {
+                const noBtn = document.getElementById('noBtn');
+                const container = noBtn.parentElement;
+
+                // Get the dimensions of the container
+                const containerRect = container.getBoundingClientRect();
+
+                // Generate random positions within the container
+                const randomX = Math.random() * (containerRect.width - noBtn.offsetWidth);
+                const randomY = Math.random() * (containerRect.height - noBtn.offsetHeight);
+
+                // Set the new position
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = `${randomX}px`;
+                noBtn.style.top = `${randomY}px`;
+            }
+
+            // Stop the movement if the user moves the mouse away
+            document.getElementById('noBtn').addEventListener('mouseleave', () => {
+                if (!yesClicked) {
+                    clearInterval(moveInterval);
+                    moveInterval = null; // Clear interval and reset
+                }
+            });
         </script>
     </body>
 </html>
